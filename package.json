@@ -5,6 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
+    "lint": "eslint . -c .ts",
+    "format": "eslint . -c .ts --fix",
     "seed:init": "ts-node ./src/seeds/init.ts",
     "prepare": "husky install"
   },
