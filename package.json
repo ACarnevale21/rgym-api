@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "format": "prettier --write \"src/**/*.ts\"'",
     "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
     "prepare": "husky install"
   },
@@ -33,5 +33,11 @@
     "express": "^4.19.2",
     "mongoose": "^8.5.3",
     "nodemon": "^3.1.4"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }
