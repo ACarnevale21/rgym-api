@@ -13,7 +13,7 @@ export const TrainerSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export type TrainerSchemaType = InferSchemaType<typeof TrainerSchema> &

@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import mongoose, { InferSchemaType } from 'mongoose';
 
 export const ExcersiceSchema = new mongoose.Schema(
   {
@@ -9,7 +9,7 @@ export const ExcersiceSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export type ExcersiceSchemaType = InferSchemaType<typeof ExcersiceSchema> &

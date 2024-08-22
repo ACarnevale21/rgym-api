@@ -1,5 +1,5 @@
-import { UserSchemaType } from "../../infrastructure/entities/user.schema";
-import { UserRepository } from "../../infrastructure/persistence/user.repository";
+import { UserSchemaType } from '../../infrastructure/entities/user.schema';
+import { UserRepository } from '../../infrastructure/persistence/user.repository';
 
 export const UserService = {
   async getUserList() {
@@ -11,7 +11,7 @@ export const UserService = {
   async createUser(user: UserSchemaType) {
     const userExists = await UserRepository.getUserById(user.id);
     if (userExists) {
-      return { message: "User already exists" };
+      return { message: 'User already exists' };
     }
     return await UserRepository.createUser(user);
   },

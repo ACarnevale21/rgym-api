@@ -1,5 +1,5 @@
-import { Routine } from "../../../modules";
-import { RoutineSchemaType } from "../entities/routine.schema";
+import { Routine } from '../../../modules';
+import { RoutineSchemaType } from '../entities/routine.schema';
 
 export const RoutineRepository = {
   async getRoutineList() {

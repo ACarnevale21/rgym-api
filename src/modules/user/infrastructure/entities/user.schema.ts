@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import mongoose, { InferSchemaType } from 'mongoose';
 
 export const UserSchema = new mongoose.Schema(
   {
@@ -8,13 +8,13 @@ export const UserSchema = new mongoose.Schema(
     routine: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Routine",
+        ref: 'Routine',
       },
     ],
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export type UserSchemaType = InferSchemaType<typeof UserSchema> &
