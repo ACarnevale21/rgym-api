@@ -24,7 +24,7 @@ export const RoutineSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export type RoutineSchemaType = InferSchemaType<typeof RoutineSchema> &

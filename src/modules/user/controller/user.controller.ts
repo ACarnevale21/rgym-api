@@ -1,5 +1,5 @@
-import { UserService } from "../application/service/user.service";
-import { Request, Response } from "express";
+import { UserService } from '../application/service/user.service';
+import { Request, Response } from 'express';
 
 export const UserController = {
   async getUserList(req: Request, res: Response) {

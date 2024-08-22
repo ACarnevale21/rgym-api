@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
-    "lint": "eslint . -c .ts",
-    "format": "eslint . -c .ts --fix",
-    "seed:init": "ts-node ./src/seeds/init.ts",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json}'",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
     "prepare": "husky install"
   },
   "author": "",
@@ -16,12 +16,17 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/express": "^4.17.21",
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
     "dotenv": "^16.4.5",
     "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
     "globals": "^15.9.0",
     "husky": "^8.0.1",
     "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3",
     "typescript-eslint": "^8.2.0"
   },
   "dependencies": {

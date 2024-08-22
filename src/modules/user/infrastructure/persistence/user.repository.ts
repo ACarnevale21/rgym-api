@@ -1,5 +1,5 @@
-import { User } from "../../../modules";
-import { UserSchemaType } from "../entities/user.schema";
+import { User } from '../../../modules';
+import { UserSchemaType } from '../entities/user.schema';
 
 export const UserRepository = {
   async getUserList() {
