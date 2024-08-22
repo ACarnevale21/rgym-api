@@ -9,6 +9,10 @@ export const UserService = {
     return await UserRepository.getUserById(id);
   },
   async createUser(user: UserSchemaType) {
+    const userExists = await UserRepository.getUserById(user.id);
+    if (userExists) {
+      return { message: "User already exists" };
+    }
     return await UserRepository.createUser(user);
   },
   async updateUser(user: UserSchemaType) {

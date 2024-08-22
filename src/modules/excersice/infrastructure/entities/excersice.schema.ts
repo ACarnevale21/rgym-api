@@ -1,8 +1,8 @@
-import mongoose, { InferSchemaType } from 'mongoose';
+import mongoose, { InferSchemaType } from "mongoose";
 
 export const ExcersiceSchema = new mongoose.Schema(
   {
-    id: { type: Number, required: true },
+    id: { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String, required: true },
     videoUrl: { type: String, required: true },
