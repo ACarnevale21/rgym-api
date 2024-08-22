@@ -1,5 +1,5 @@
-import { UserSchemaType } from '../../infrastructure/entities/user.schema';
-import { UserRepository } from '../../infrastructure/persistence/user.repository';
+import { UserSchemaType } from "../../infrastructure/entities/user.schema";
+import { UserRepository } from "../../infrastructure/persistence/user.repository";
 
 export const UserService = {
   async getUserList() {
