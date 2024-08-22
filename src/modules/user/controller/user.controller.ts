@@ -7,9 +7,11 @@ export const UserController = {
       const sad = req.body;
       console.log(sad);
       const userList = await UserService.getUserList();
-      res.sendStatus(200).json(userList);
+      res.status(200).json(userList);
     } catch (error) {
       res.status(500).send(error);
     }
   },
 };
+
+export default UserController;
