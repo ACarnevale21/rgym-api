@@ -11,7 +11,7 @@ export const ExcersiceSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
-
+console.log('ExcersiceSchema', ExcersiceSchema);
 export type ExcersiceSchemaType = InferSchemaType<typeof ExcersiceSchema> &
   Document & {
     _id: mongoose.Types.ObjectId | string;
