@@ -2,6 +2,8 @@ import { UserSchemaType } from '../../infrastructure/entities/user.schema';
 import { UserRepository } from '../../infrastructure/persistence/user.repository';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { CreateUserRequestDto } from '../dto/request/create-user.dto';
+import { newUserMapper } from '../utils/user.utils';
 
 const JWT_SECRET = (process.env.JWT_SECRET as string) || 'aguanteboca';
 
@@ -12,13 +14,18 @@ export const UserService = {
   async getUserById(id: string) {
     return await UserRepository.getUserById(id);
   },
-  async createUser(user: UserSchemaType) {
-    const userExists = await UserRepository.getUserById(user.id);
+  async createUser(user: CreateUserRequestDto) {
+    const userExists = await UserRepository.getUserByEmail(user.email);
+
     if (userExists) {
       return { message: 'User already exists' };
     }
-    user.password = await bcrypt.hash(user.password, 10);
-    return await UserRepository.createUser(user);
+
+    const newUserMapped = newUserMapper(user);
+
+    newUserMapped.password = await bcrypt.hash(user.password, 10);
+
+    return await UserRepository.createUser(newUserMapped);
   },
   async updateUser(user: UserSchemaType) {
     return await UserRepository.updateUser(user);
@@ -26,8 +33,8 @@ export const UserService = {
   async deleteUser(id: string) {
     return await UserRepository.deleteUser(id);
   },
-  async authenticateUser(id: string, password: string) {
-    const user = await UserRepository.getUserById(id);
+  async authenticateUser(email: string, password: string) {
+    const user = await UserRepository.getUserByEmail(email);
     if (!user) {
       throw new Error('User not found');
     }

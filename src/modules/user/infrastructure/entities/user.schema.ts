@@ -2,10 +2,10 @@ import mongoose, { InferSchemaType, Document } from 'mongoose';
 
 export const UserSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
-    description: { type: String, required: true },
+    email: { type: String, required: true },
+    description: { type: String, required: false },
     routine: [
       {
         type: mongoose.Schema.Types.ObjectId,
