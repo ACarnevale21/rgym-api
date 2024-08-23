@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType } from 'mongoose';
+import mongoose, { InferSchemaType, Document } from 'mongoose';
 
 export const ExcersiceSchema = new mongoose.Schema(
   {

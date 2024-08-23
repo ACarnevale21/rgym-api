@@ -12,6 +12,16 @@ export const UserController = {
       res.status(500).send(error);
     }
   },
+  async login(req: Request, res: Response) {
+    try {
+      const { name, password } = req.body;
+      const { token, user } = await UserService.authenticateUser(
+        name,
+        password,
+      );
+      res.status(200).json({ token, user });
+    } catch (error) {
+      res.status(401).send(error);
+    }
+  },
 };
-
-export default UserController;
