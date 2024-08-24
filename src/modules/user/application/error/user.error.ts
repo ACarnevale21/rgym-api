@@ -1,8 +1,4 @@
-const createError = (code: number, message: string, detail?: string) => ({
-  code,
-  message,
-  detail: detail || message, // Si no se proporciona un detalle, se utiliza el mensaje como detalle
-});
+import { createError } from '@/modules/common/application/utils/common.utils';
 
 export const UserError = {
   userNotFound: createError(

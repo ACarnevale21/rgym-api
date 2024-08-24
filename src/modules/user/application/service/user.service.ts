@@ -1,8 +1,8 @@
-import { UserSchemaType } from '../../infrastructure/entities/user.schema';
 import { UserRepository } from '../../infrastructure/persistence/user.repository';
 import bcrypt from 'bcryptjs';
 import { CreateUserRequestDto } from '../dto/request/create-user.dto';
-import { newUserMapper } from '../utils/user.utils';
+import { newUserMapper, updateUserMapper } from '../utils/user.utils';
+import { UpdateUserRequestDto } from '../dto/request/update-user.dto';
 
 export const UserService = {
   async getUserList() {
@@ -24,8 +24,14 @@ export const UserService = {
 
     return await UserRepository.createUser(newUserMapped);
   },
-  async updateUser(user: UserSchemaType) {
-    return await UserRepository.updateUser(user);
+  async updateUser(
+    userId: string,
+    updatedUserInformation: UpdateUserRequestDto,
+  ) {
+    const userExists = await UserRepository.getUserById(userId);
+    const userMapped = updateUserMapper(userExists, updatedUserInformation);
+
+    return await UserRepository.updateUser(userMapped);
   },
   async deleteUser(id: string) {
     return await UserRepository.deleteUser(id);
