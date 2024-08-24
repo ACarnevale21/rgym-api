@@ -1,5 +1,5 @@
 import { Excersice } from '../../../modules';
-import { ExcersiceSchemaType } from '../entities/excersice.schema';
+import { ExcersiceSchemaType } from '../entities/excercise.schema';
 
 export const ExcersiceRepository = {
   async getExcersiceList() {

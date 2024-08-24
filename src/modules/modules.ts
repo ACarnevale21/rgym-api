@@ -3,7 +3,7 @@ import mongoose, { Model, model } from 'mongoose';
 import {
   ExcersiceSchema,
   ExcersiceSchemaType,
-} from './excersice/infrastructure/entities/excersice.schema';
+} from './excercise/infrastructure/entities/excercise.schema';
 import {
   RoutineSchema,
   RoutineSchemaType,

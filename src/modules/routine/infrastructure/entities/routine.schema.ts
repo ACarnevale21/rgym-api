@@ -1,13 +1,19 @@
-import mongoose, { InferSchemaType, Document } from 'mongoose';
+import mongoose, { InferSchemaType, Document, Schema } from 'mongoose';
 
 export const RoutineSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    excersices: [
+    exercises: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Excersice',
+        exerciseId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Exercise',
+          required: true,
+        },
+        sets: { type: Number, required: true },
+        reps: { type: Number, required: true },
+        rest: { type: Number, required: true },
       },
     ],
     createdBy: {
@@ -15,12 +21,6 @@ export const RoutineSchema = new mongoose.Schema(
       ref: 'Trainer',
       required: true,
     },
-    users: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
   },
   {
     timestamps: true,
