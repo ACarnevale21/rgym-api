@@ -1,4 +1,4 @@
-import { createError } from '@/modules/common/application/utils/common.utils';
+import { createError } from '@/common/application/utils/common.utils';
 
 export const AuthError = {
   noTokenProvided: createError(
