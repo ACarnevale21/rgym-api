@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { CreateUserRequestDto } from '../application/dto/request/create-user.dto';
+import { UserError } from '../application/error/user.error';
 
 export const UserController = {
   async getUserList(req: Request, res: Response) {
@@ -23,8 +24,16 @@ export const UserController = {
       }
       const newUser = await UserService.createUser(user);
       res.status(201).json(newUser);
-    } catch (error) {
-      res.status(500).send(error);
+    } catch {
+      res.status(500).send(UserError.userAlreadyExists);
+    }
+  },
+  async getUserById(req: Request, res: Response) {
+    try {
+      const user = await UserService.getUserById(req.params.id);
+      res.status(200).json(user);
+    } catch {
+      res.status(404).json(UserError.errorUserNotFound);
     }
   },
 };
