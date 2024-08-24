@@ -8,6 +8,7 @@ export const newUserMapper = (user: CreateUserRequestDto): UserSchemaType => {
   newUser.name = user.name;
   newUser.password = user.password;
   newUser.email = user.email;
+  newUser.role = 'user';
   return newUser;
 };
 

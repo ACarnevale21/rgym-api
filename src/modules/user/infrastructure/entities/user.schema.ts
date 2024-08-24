@@ -6,6 +6,14 @@ export const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     email: { type: String, required: true },
     description: { type: String, required: false },
+    role: { type: String, enum: ['admin', 'user'], required: true },
+    age: { type: Number },
+    weight: { type: Number },
+    height: { type: Number },
+    goal: {
+      type: String,
+      enum: ['Perder peso', 'Ganar músculo', 'Mantenerme en forma'],
+    },
     routine: [
       {
         type: mongoose.Schema.Types.ObjectId,
