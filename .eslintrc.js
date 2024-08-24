@@ -1,19 +1,19 @@
-export default {
-  parser: '@typescript-eslint/parser', // Especifica el parser para TypeScript
+module.exports = {
+  parser: '@typescript-eslint/parser',
   extends: [
-    'plugin:@typescript-eslint/recommended', // Reglas recomendadas para TypeScript
-    'prettier', // Desactiva las reglas de ESLint que pueden entrar en conflicto con Prettier
-    'prettier/@typescript-eslint', // Desactiva reglas específicas de TypeScript que pueden entrar en conflicto con Prettier
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
   ],
-  plugins: ['@typescript-eslint', 'prettier'], // Plugins para TypeScript y Prettier
+  plugins: ['@typescript-eslint', 'prettier', 'react'],
   rules: {
-    'prettier/prettier': 'error', // Muestra errores cuando el código no sigue el formato de Prettier
-    '@typescript-eslint/explicit-function-return-type': 'off', // Desactiva la necesidad de declarar el tipo de retorno explícitamente
-    '@typescript-eslint/no-explicit-any': 'off', // Permite el uso de "any"
+    'prettier/prettier': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn', // O "off" si prefieres desactivarlo
   },
   settings: {
     react: {
-      version: 'detect', // Automatically detect the React version
+      version: 'detect',
     },
   },
 };
