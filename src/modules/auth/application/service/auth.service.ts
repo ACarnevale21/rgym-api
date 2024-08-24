@@ -1,6 +1,6 @@
 import { UserService } from '@/modules/user/application/service/user.service';
 import { generateToken } from '../utils/jwt.util';
-import { LoginResponseDto } from '@/modules/user/application/dto/response/login.response.dto';
+import { LoginResponseDto } from '../dto/response/login.response.dto';
 import bcrypt from 'bcryptjs';
 
 export const AuthService = {

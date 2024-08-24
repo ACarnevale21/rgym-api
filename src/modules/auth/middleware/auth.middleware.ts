@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../application/utils/jwt.util';
 import { JwtPayload } from 'jsonwebtoken';
+import { AuthError } from '../application/error/auth.error';
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -9,16 +10,19 @@ declare module 'express-serve-static-core' {
 }
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.headers['cookie']) {
+    return res.send(AuthError.noTokenProvided);
+  }
   const token = req.headers['cookie'].split('=')[1];
   if (!token) {
-    return res.status(401).send('Access denied. No token provided.');
+    return res.send(AuthError.noTokenProvided);
   }
   try {
     const decoded = verifyToken(token);
     req.user = decoded;
     next();
   } catch {
-    res.status(400).send('Invalid token');
+    res.send(AuthError.invalidToken);
   }
 };
 
