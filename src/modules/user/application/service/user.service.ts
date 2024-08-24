@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { CreateUserRequestDto } from '../dto/request/create-user.dto';
 import { newUserMapper, updateUserMapper } from '../utils/user.utils';
 import { UpdateUserRequestDto } from '../dto/request/update-user.dto';
+import { IUser } from '../interface/user.interface';
 
 export const UserService = {
   async getUserList() {
@@ -11,11 +12,11 @@ export const UserService = {
   async getUserById(id: string) {
     return await UserRepository.getUserById(id);
   },
-  async createUser(user: CreateUserRequestDto) {
+  async createUser(user: CreateUserRequestDto): Promise<IUser> {
     const userExists = await UserRepository.getUserByEmail(user.email);
 
     if (userExists) {
-      return { message: 'User already exists' };
+      throw new Error('User already exists');
     }
 
     const newUserMapped = newUserMapper(user);
