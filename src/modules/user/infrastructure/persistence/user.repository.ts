@@ -6,7 +6,11 @@ export const UserRepository = {
     return await User.find();
   },
   async getUserById(id: string) {
-    return await User.findById(id);
+    try {
+      return await User.findById(id);
+    } catch {
+      throw new Error('Error, user not found');
+    }
   },
   async createUser(user: UserSchemaType) {
     return await User.create(user);
