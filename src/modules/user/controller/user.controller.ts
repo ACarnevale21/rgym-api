@@ -7,8 +7,6 @@ import { CreateUserRequestDto } from '../application/dto/request/create-user.dto
 export const UserController = {
   async getUserList(req: Request, res: Response) {
     try {
-      const sad = req.body;
-      console.log(sad);
       const userList = await UserService.getUserList();
       res.status(200).json(userList);
     } catch (error) {
@@ -18,18 +16,14 @@ export const UserController = {
   async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
-      const { token, user } = await UserService.authenticateUser(
-        email,
-        password,
-      );
-      res.status(200).json({ token, user });
+      const response = await UserService.authenticateUser(email, password);
+      res.status(200).json(response);
     } catch (error) {
       res.status(401).send(error);
     }
   },
   async createUser(req: Request, res: Response) {
     try {
-      console.log(req.body);
       const user = plainToClass(CreateUserRequestDto, req.body);
       const errors = await validate(user);
 

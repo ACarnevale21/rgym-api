@@ -1,11 +1,10 @@
 import { UserSchemaType } from '../../infrastructure/entities/user.schema';
 import { UserRepository } from '../../infrastructure/persistence/user.repository';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { CreateUserRequestDto } from '../dto/request/create-user.dto';
 import { newUserMapper } from '../utils/user.utils';
-
-const JWT_SECRET = (process.env.JWT_SECRET as string) || 'aguanteboca';
+import { generateToken } from '@/modules/jwt.util';
+import { LoginResponseDto } from '../dto/response/login.response.dto';
 
 export const UserService = {
   async getUserList() {
@@ -33,21 +32,33 @@ export const UserService = {
   async deleteUser(id: string) {
     return await UserRepository.deleteUser(id);
   },
-  async authenticateUser(email: string, password: string) {
+  async authenticateUser(
+    email: string,
+    password: string,
+  ): Promise<LoginResponseDto> {
     const user = await UserRepository.getUserByEmail(email);
     if (!user) {
       throw new Error('User not found');
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
+
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-    if (!JWT_SECRET) {
-      throw new Error('JWT_SECRET is not defined');
-    }
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: '1h',
+
+    const token = generateToken({
+      email: user.email,
+      name: user.name,
     });
-    return { token, user };
+
+    const response = new LoginResponseDto();
+    response.accessToken = token;
+    response.expiresIn = '1h';
+    response.user = {
+      email: user.email,
+      name: user.name,
+    };
+    return response;
   },
 };
