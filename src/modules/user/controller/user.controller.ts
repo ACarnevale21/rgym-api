@@ -13,15 +13,6 @@ export const UserController = {
       res.status(500).send(error);
     }
   },
-  async login(req: Request, res: Response) {
-    try {
-      const { email, password } = req.body;
-      const response = await UserService.authenticateUser(email, password);
-      res.status(200).json(response);
-    } catch (error) {
-      res.status(401).send(error);
-    }
-  },
   async createUser(req: Request, res: Response) {
     try {
       const user = plainToClass(CreateUserRequestDto, req.body);

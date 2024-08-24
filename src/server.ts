@@ -3,6 +3,7 @@ import router from './modules/user/routes/user.router';
 import userNavigation from './modules/user/routes/user.router';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import authNavigation from './modules/auth/routes/auth.router';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const port = 3000;
 app.use(express.json());
 
 app.get('/api', userNavigation);
+app.use('/api', authNavigation);
 
 mongoose
   .connect(process.env.MONGO_URI as string)

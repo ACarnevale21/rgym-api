@@ -12,7 +12,7 @@ export const generateToken = (payload: Payload) => {
     throw new Error('Error generating token');
   }
 };
- 
+
 export const verifyToken = (token: string) => {
   try {
     return jwt.verify(token, process.env.JWT_SECRET);

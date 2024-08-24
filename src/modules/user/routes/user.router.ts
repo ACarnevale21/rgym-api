@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { UserController } from '../controller/user.controller';
-import authMiddleware from './auth.middleware'; // Ensure correct import path
+import authMiddleware from '../../auth/middleware/auth.middleware';
 
 const userNavigation = Router();
 
-userNavigation.get('/users', authMiddleware, UserController.getUserList);
-userNavigation.post('/login', UserController.login);
-userNavigation.post('/users', UserController.createUser);
+userNavigation.post('/user', UserController.createUser);
+userNavigation.get('/user', authMiddleware, UserController.getUserList);
 
 export default userNavigation;
