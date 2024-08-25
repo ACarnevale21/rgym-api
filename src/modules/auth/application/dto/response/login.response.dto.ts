@@ -6,3 +6,12 @@ export class LoginResponseDto {
     name: string;
   };
 }
+
+export class LoginTrainerResponseDto {
+  accessToken: string;
+  expiresIn: string;
+  trainer: {
+    email: string;
+    name: string;
+  };
+}

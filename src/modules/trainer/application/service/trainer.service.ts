@@ -30,15 +30,9 @@ export const TrainerService = {
     return await TrainerRepository.createTrainer(newTrainerMapped);
   },
 
-  //   const newTrainer: TrainerSchemaType = new TrainerRepository({
-  //     ...trainerData,
-  //     createdAt: new Date(),
-  //     updatedAt: new Date(),
-  //   });
-
-  //   await newTrainer.save();
-  //   return newTrainer;
-  // },
+  async getTrainerByEmail(email: string) {
+    return await TrainerRepository.getTrainerByEmail(email);
+  },
 
   async updateTrainer(
     trainerId: string,
