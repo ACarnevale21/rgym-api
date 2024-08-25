@@ -4,6 +4,7 @@ import userNavigation from './modules/user/routes/user.router';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authNavigation from './modules/auth/routes/auth.router';
+import trainerNavigation from './modules/trainer/routes/trainer.router';
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 app.get('/api', userNavigation);
 app.use('/api', authNavigation);
+app.use('/api', trainerNavigation);
+app.get('/api', trainerNavigation);
 
 mongoose
   .connect(process.env.MONGO_URI as string)
