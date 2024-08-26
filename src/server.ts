@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import authNavigation from './modules/auth/routes/auth.router';
 import exerciseNavigation from './modules/excercise/routes/exercise.router';
 import trainerNavigation from './modules/trainer/routes/trainer.router';
+import { middleware } from './middleware';
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app: Application = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(middleware);
 
 app.use('/api', userNavigation);
 app.use('/api', authNavigation);
