@@ -13,7 +13,7 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get('/api', userNavigation);
+app.use('/api', userNavigation);
 app.use('/api', authNavigation);
 app.use('/api', trainerNavigation);
 
