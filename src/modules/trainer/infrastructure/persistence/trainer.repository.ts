@@ -13,7 +13,16 @@ export const TrainerRepository = {
       throw new Error('Unknown error fetching trainer list');
     }
   },
-
+  async getTrainerByEmail(email: string) {
+    try {
+      return await Trainer.findOne({ email });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Error fetching trainer by email: ${error.message}`);
+      }
+      throw new Error('Unknown error fetching trainer by email');
+    }
+  },
   async getTrainerById(id: string) {
     try {
       if (!mongoose.Types.ObjectId.isValid(id)) {

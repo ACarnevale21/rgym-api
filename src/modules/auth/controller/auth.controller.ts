@@ -19,4 +19,21 @@ export const AuthController = {
       res.status(401).send(error);
     }
   },
+  async loginTrainer(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      const response = await AuthService.authenticateTrainer(email, password);
+
+      res.cookie('token', response.accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 3600000,
+        sameSite: 'strict',
+      });
+
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(401).send(error);
+    }
+  },
 };
