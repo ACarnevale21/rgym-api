@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export class UpdateTrainerRequestDto {
   name?: string;
 
@@ -5,5 +7,5 @@ export class UpdateTrainerRequestDto {
 
   password?: string;
 
-  routinesCreated?: string[];
+  routinesCreated?: Types.ObjectId[];
 }

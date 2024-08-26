@@ -9,6 +9,7 @@ export const TrainerSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Routine',
+        required: false,
       },
     ],
   },

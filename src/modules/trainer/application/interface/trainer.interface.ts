@@ -1,6 +1,8 @@
+import { Types } from 'mongoose';
+
 export interface ITrainer extends Document {
   name: string;
   email: string;
   password: string;
-  routinesCreated: Array<string>;
+  routinesCreated: Types.ObjectId[];
 }

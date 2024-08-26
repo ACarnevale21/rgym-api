@@ -10,6 +10,4 @@ export class CreateTrainerRequestDto {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  routinesCreated?: string[];
 }

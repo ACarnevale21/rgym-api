@@ -15,10 +15,11 @@ export const newTrainerMapper = (
 
 export const updateTrainerMapper = (
   trainer: TrainerSchemaType,
-  updatedUser: Partial<ITrainer>,
+  updatedTrainer: Partial<ITrainer>,
 ): TrainerSchemaType => {
-  trainer.name = updatedUser.name;
-  trainer.email = updatedUser.email;
-  trainer.password = updatedUser.password;
+  trainer.name = updatedTrainer.name;
+  trainer.email = updatedTrainer.email;
+  trainer.password = updatedTrainer.password;
+  trainer.routinesCreated = updatedTrainer.routinesCreated;
   return trainer;
 };
