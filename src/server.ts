@@ -16,7 +16,6 @@ app.use(express.json());
 app.get('/api', userNavigation);
 app.use('/api', authNavigation);
 app.use('/api', trainerNavigation);
-app.get('/api', trainerNavigation);
 
 mongoose
   .connect(process.env.MONGO_URI as string)
