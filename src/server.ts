@@ -1,9 +1,9 @@
 import express, { Application } from 'express';
-import router from './modules/user/routes/user.router';
 import userNavigation from './modules/user/routes/user.router';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authNavigation from './modules/auth/routes/auth.router';
+import exerciseNavigation from './modules/excercise/routes/exercise.router';
 import trainerNavigation from './modules/trainer/routes/trainer.router';
 
 dotenv.config();
@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use('/api', userNavigation);
 app.use('/api', authNavigation);
+app.use('/api', exerciseNavigation);
 app.use('/api', trainerNavigation);
 
 mongoose
@@ -25,5 +26,3 @@ mongoose
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-app.use('/api', router);

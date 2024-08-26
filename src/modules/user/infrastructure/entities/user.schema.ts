@@ -7,12 +7,13 @@ export const UserSchema = new mongoose.Schema<IUser>(
     name: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    age: { type: Number },
-    weight: { type: Number },
-    height: { type: Number },
+    age: { type: Number, required: true },
+    weight: { type: Number, required: true },
+    height: { type: Number, required: true },
     goal: {
       type: String,
       enum: UserGoal,
+      required: true,
     },
   },
   {

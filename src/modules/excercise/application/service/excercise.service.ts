@@ -1,5 +1,11 @@
-import { ExcersiceSchemaType } from '../../infrastructure/entities/excercise.schema';
 import { ExcersiceRepository } from '../../infrastructure/persistence/excercise.repository';
+import { ExerciseRequestDto } from '../dto/exercise-request.dto';
+import { UpdateExerciseDto } from '../dto/exercise-update.dto';
+import {
+  exerciseMapper,
+  updateExerciseMapper,
+} from '../mapper/exercise.mapper';
+import { validateExerciseAndGet } from '../utils/exercise.utils';
 
 export const ExcersiceService = {
   async getExcersiceList() {
@@ -8,11 +14,26 @@ export const ExcersiceService = {
   async getExcersiceById(id: string) {
     return await ExcersiceRepository.getExcersiceById(id);
   },
-  async createExcersice(excersice: ExcersiceSchemaType) {
-    return await ExcersiceRepository.createExcersice(excersice);
+  async createExcersice(excercise: ExerciseRequestDto) {
+    await validateExerciseAndGet(excercise);
+
+    const exerciseMapped = exerciseMapper(excercise);
+    return await ExcersiceRepository.createExcersice(exerciseMapped);
   },
-  async updateExcersice(excersice: ExcersiceSchemaType) {
-    return await ExcersiceRepository.updateExcersice(excersice);
+  async updateExcersice(
+    exerciseId: string,
+    updatedExerciseInformation: UpdateExerciseDto,
+  ) {
+    const exercise = await ExcersiceRepository.getExcersiceById(exerciseId);
+    const exerciseMapped = updateExerciseMapper(
+      exercise,
+      updatedExerciseInformation,
+    );
+
+    return await ExcersiceRepository.updateExcersice(
+      exerciseId,
+      exerciseMapped,
+    );
   },
   async deleteExcersice(id: string) {
     return await ExcersiceRepository.deleteExcersice(id);
