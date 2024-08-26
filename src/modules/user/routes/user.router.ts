@@ -1,13 +1,12 @@
 import { Router } from 'express';
 import { UserController } from '../controller/user.controller';
-import authMiddleware from '../../auth/middleware/auth.middleware';
 
 const userNavigation = Router();
 
-userNavigation.post('/user', UserController.createUser);
-userNavigation.get('/user', authMiddleware, UserController.getUserList);
-userNavigation.get('/user/:id', authMiddleware, UserController.getUserById);
-userNavigation.patch('/user/:id', authMiddleware, UserController.updateUser);
-userNavigation.delete('/user/:id', authMiddleware, UserController.deleteUser);
+userNavigation.post('/user-register', UserController.createUser);
+userNavigation.get('/user', UserController.getUserList);
+userNavigation.get('/user/:id', UserController.getUserById);
+userNavigation.patch('/user/:id', UserController.updateUser);
+userNavigation.delete('/user/:id', UserController.deleteUser);
 
 export default userNavigation;
