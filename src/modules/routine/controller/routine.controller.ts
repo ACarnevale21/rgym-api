@@ -1,5 +1,9 @@
+import { plainToClass } from 'class-transformer';
 import { RoutineService } from '../application/service/routine.service';
 import { Request, Response } from 'express';
+import { CreateRoutineRequestDto } from '../application/dto/request/create-routine.dto';
+import { validate } from 'class-validator';
+import { UpdateRoutineRequestDto } from '../application/dto/request/update-routine-dto';
 
 export const RoutineController = {
   async getRoutineList(req: Request, res: Response) {
@@ -13,23 +17,26 @@ export const RoutineController = {
 
   async createRoutine(req: Request, res: Response) {
     try {
-      const { name, description, videoUrl, id, createdAt, updatedAt, _id } =
-        req.body;
+      const routine = plainToClass(CreateRoutineRequestDto, req.body);
+      const errors = await validate(routine);
 
-      const routine = {
-        name,
-        description,
-        videoUrl,
-        id,
-        createdAt,
-        updatedAt,
-        _id,
-      };
+      if (errors.length > 0) {
+        return res.status(400).json({ message: 'Validation failed', errors });
+      }
 
-      const newRoutine = await RoutineService.createRoutine(routine);
-      res.status(201).json(newRoutine);
+      const existingRoutine = await RoutineService.getRoutineByName(
+        routine.name,
+      );
+
+      if (existingRoutine) {
+        return res.status(400).json({ message: 'Routine already exists' });
+      }
+
+      const createdRoutine = await RoutineService.createRoutine(routine);
+      res.status(201).json(createdRoutine);
     } catch (error) {
-      res.status(500).send({ message: 'Routine already exists', error });
+      console.error(error);
+      res.status(500).send({ message: 'Error creating routine', error });
     }
   },
 
@@ -48,28 +55,21 @@ export const RoutineController = {
 
   async updateRoutine(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      const { name, description, videoUrl, createdAt, updatedAt, _id } =
-        req.body;
+      const routine = plainToClass(UpdateRoutineRequestDto, req.body);
+      const errors = await validate(routine);
 
-      // Assuming the routine service expects an object with these properties
-      const routine = {
-        name,
-        description,
-        videoUrl,
-        id,
-        createdAt,
-        updatedAt,
-        _id,
-      };
+      const routineId = req.params.id;
 
-      const updatedRoutine = await RoutineService.updateRoutine(id, routine);
-      if (!updatedRoutine) {
-        return res.status(404).json({ message: 'Routine not found' });
+      if (errors.length > 0) {
+        return res.status(400).json({ message: 'Validation failed', errors });
       }
+      const updatedRoutine = await RoutineService.updateRoutine(
+        routineId,
+        routine,
+      );
       res.status(200).json(updatedRoutine);
-    } catch (error) {
-      res.status(500).send(error);
+    } catch {
+      res.status(500).send('Error updating routine');
     }
   },
 

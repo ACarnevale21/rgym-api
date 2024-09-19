@@ -1,6 +1,6 @@
-import { IsString, IsNotEmpty, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsArray, IsNumber } from 'class-validator';
 
-export class CreateUserRequestDto {
+export class CreateRoutineRequestDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -11,5 +11,21 @@ export class CreateUserRequestDto {
 
   @IsArray()
   @IsNotEmpty()
-  exercises: string;
+  exercises: string[];
+
+  @IsNumber()
+  @IsNotEmpty()
+  sets: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  reps: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  rest: number;
+
+  @IsString()
+  @IsNotEmpty()
+  createdBy: string;
 }

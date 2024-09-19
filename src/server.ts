@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import authNavigation from './modules/auth/routes/auth.router';
 import exerciseNavigation from './modules/excercise/routes/exercise.router';
 import trainerNavigation from './modules/trainer/routes/trainer.router';
+import routineNavigation from './modules/routine/routes/routines.routes';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use('/api', userNavigation);
 app.use('/api', authNavigation);
 app.use('/api', exerciseNavigation);
 app.use('/api', trainerNavigation);
+app.use('/api', routineNavigation);
 
 mongoose
   .connect(process.env.MONGO_URI as string)
