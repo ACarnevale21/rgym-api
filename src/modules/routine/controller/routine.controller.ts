@@ -33,6 +33,7 @@ export const RoutineController = {
       }
 
       const createdRoutine = await RoutineService.createRoutine(routine);
+      console.log(createdRoutine);
       res.status(201).json(createdRoutine);
     } catch (error) {
       console.error(error);

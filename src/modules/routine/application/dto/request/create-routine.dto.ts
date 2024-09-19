@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsArray, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsArray } from 'class-validator';
 
 export class CreateRoutineRequestDto {
   @IsString()
@@ -11,19 +11,12 @@ export class CreateRoutineRequestDto {
 
   @IsArray()
   @IsNotEmpty()
-  exercises: string[];
-
-  @IsNumber()
-  @IsNotEmpty()
-  sets: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  reps: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  rest: number;
+  exercises: {
+    exerciseId: string;
+    sets: number;
+    reps: number;
+    rest: number;
+  }[];
 
   @IsString()
   @IsNotEmpty()

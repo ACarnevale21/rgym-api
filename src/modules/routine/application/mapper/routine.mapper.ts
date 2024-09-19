@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { RoutineSchemaType } from '../../infrastructure/entities/routine.schema';
 import { CreateRoutineRequestDto } from '../dto/request/create-routine.dto';
 import { Routine } from '@/modules/modules';
-import { IRoutine } from '../interface/routineinterface';
+import { IRoutine } from '../interface/routine.interface';
 
 export const routineMapper = (
   routine: CreateRoutineRequestDto,
@@ -11,11 +11,11 @@ export const routineMapper = (
   newRoutine.name = routine.name;
   newRoutine.description = routine.description;
   newRoutine.exercises = new mongoose.Types.DocumentArray(
-    routine.exercises.map((exerciseId) => ({
-      exerciseId: new mongoose.Types.ObjectId(exerciseId),
-      sets: Number(routine.sets),
-      reps: Number(routine.reps),
-      rest: Number(routine.rest),
+    routine.exercises.map((exercise) => ({
+      exerciseId: new mongoose.Types.ObjectId(exercise.exerciseId),
+      sets: exercise.sets,
+      reps: exercise.reps,
+      rest: exercise.rest,
     })),
   );
   newRoutine.createdBy = new mongoose.Types.ObjectId(routine.createdBy);
@@ -30,21 +30,19 @@ export const updateRoutineMapper = (
     routine.name = updatedRoutineInformation.name;
     routine.description = updatedRoutineInformation.description;
 
-    // Check if exercises exists and is an array before mapping
     if (
       updatedRoutineInformation.exercises &&
       Array.isArray(updatedRoutineInformation.exercises)
     ) {
       routine.exercises = new mongoose.Types.DocumentArray(
-        updatedRoutineInformation.exercises.map((exerciseId) => ({
-          exerciseId: new mongoose.Types.ObjectId(exerciseId),
-          sets: Number(updatedRoutineInformation.sets),
-          reps: Number(updatedRoutineInformation.reps),
-          rest: Number(updatedRoutineInformation.rest),
+        updatedRoutineInformation.exercises.map((exercise) => ({
+          exerciseId: new mongoose.Types.ObjectId(exercise.exerciseId),
+          sets: exercise.sets,
+          reps: exercise.reps,
+          rest: exercise.rest,
         })),
       );
     }
-
     return routine;
   } catch (error) {
     console.error(error);

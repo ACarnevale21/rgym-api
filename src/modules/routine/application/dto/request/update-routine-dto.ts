@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsNumber } from 'class-validator';
+import { IsString, IsOptional, IsArray } from 'class-validator';
 
 export class UpdateRoutineRequestDto {
   @IsString()
@@ -11,19 +11,15 @@ export class UpdateRoutineRequestDto {
 
   @IsArray()
   @IsOptional()
-  exercises: string[];
+  exercises?: {
+    exerciseId: string;
 
-  @IsNumber()
-  @IsOptional()
-  sets?: number;
+    sets: number;
 
-  @IsNumber()
-  @IsOptional()
-  reps?: number;
+    reps: number;
 
-  @IsNumber()
-  @IsOptional()
-  rest?: number;
+    rest: number;
+  }[];
 
   @IsString()
   @IsOptional()

@@ -2,7 +2,7 @@ import { RoutineSchemaType } from '../../infrastructure/entities/routine.schema'
 import { RoutineRepository } from '../../infrastructure/persistence/routine.repository';
 import { CreateRoutineRequestDto } from '../dto/request/create-routine.dto';
 import { UpdateRoutineRequestDto } from '../dto/request/update-routine-dto';
-import { routineMapper, updateRoutineMapper } from '../mapper/routinemapper';
+import { routineMapper, updateRoutineMapper } from '../mapper/routine.mapper';
 
 export const RoutineService = {
   async getRoutineList() {
@@ -18,7 +18,9 @@ export const RoutineService = {
     routines: CreateRoutineRequestDto,
   ): Promise<RoutineSchemaType> {
     try {
+      console.log(routines);
       const newRoutine = routineMapper(routines);
+      console.log(newRoutine);
       return await RoutineRepository.createRoutine(newRoutine);
     } catch (error) {
       console.error(error);
