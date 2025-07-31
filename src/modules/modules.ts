@@ -25,8 +25,8 @@ export const Routine: Model<RoutineSchemaType> =
   mongoose.models?.Routine ||
   model<RoutineSchemaType>('Routine', RoutineSchema);
 
-export const User: Model<UserSchemaType> =
-  mongoose.models?.User || model<UserSchemaType>('User', UserSchema);
+export const User =
+  mongoose.models?.User || model('User', UserSchema);
 
 export const Trainer: Model<TrainerSchemaType> =
   mongoose.models?.Trainer ||
